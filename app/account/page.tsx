@@ -1,10 +1,3 @@
-import Navigation from "../components/Navigation";
-
 export default function Page() {
-  return (
-    <div className="text-red-500">
-      <Navigation />
-      Account
-    </div>
-  );
+  return <div className="text-red-500">Account</div>;
 }
