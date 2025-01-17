@@ -41,9 +41,8 @@ export default function Page() {
         <Image
           src={image1}
           alt="Family sitting around a fire pit in front of cabin"
-          placeholder="blur"
           // the below 2 properties are only applicable to statically imported image
-          fill
+          placeholder="blur"
           quality={80}
         />
       </div>
@@ -53,6 +52,7 @@ export default function Page() {
           src="/about-2.jpg"
           alt="Family that manages The Wild Oasis"
           className="object-cover"
+          fill
         />
       </div>
 
