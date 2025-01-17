@@ -69,7 +69,7 @@ export default function Page() {
             dedication to creating a warm, welcoming environment.
           </p>
           <p>
-            Over the years, we've maintained the essence of The Wild Oasis,
+            Over the years, we&apos;ve maintained the essence of The Wild Oasis,
             blending the timeless beauty of the mountains with the personal
             touch only a family business can offer. Here, you&apos;re not just a
             guest. you&apos;e part of our extended family. So join us at The
