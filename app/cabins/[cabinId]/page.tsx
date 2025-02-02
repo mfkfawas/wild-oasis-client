@@ -1,6 +1,19 @@
 import Image from "next/image";
-import { getCabin } from "@/app/_lib/data-service";
+import { getCabin, getCabins } from "@/app/_lib/data-service";
 import { EyeSlashIcon, MapPinIcon, UsersIcon } from "@heroicons/react/24/solid";
+
+// 1. this nextjs convention is used to make this pages static rendered instead of dynamic(default behaviour of param eg:[cabinId] routes).
+// 2. So, if in your application you have finite set of values for a dynamic segment of a url(i.e we already know the cabinIds here and this route is [cabinId]),
+//    its always a good idea to tell nextjs about those using generateStaticParams.
+export async function generateStaticParams() {
+  const cabins = await getCabins();
+
+  // we r converting to String bcz of nextjs convention
+  // object key should match the dynamic segment/route(here cabinId)
+  const ids = cabins.map((cabin) => ({ cabinId: String(cabin.id) }));
+
+  return ids;
+}
 
 // dynamic metadata(this fn also get access to the current params)
 export async function generateMetadata({ params }) {
