@@ -4,6 +4,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 function Filter() {
   const searchParams = useSearchParams();
+  // this hook allows for the programatic navigation b/w routes - imperative. For declarative <Link />
   const router = useRouter();
   const pathname = usePathname();
 
@@ -11,6 +12,8 @@ function Filter() {
 
   function handleFilter(filter) {
     const params = new URLSearchParams(searchParams);
+
+    // this only set internally, will not navigate(reflect) in browser URL, for that next step
     params.set("capacity", filter);
     router.replace(`${pathname}?${params.toString()}`, { scroll: false });
   }

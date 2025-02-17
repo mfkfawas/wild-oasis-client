@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import Spinner from "@/app/_components/Spinner";
 import { CabinList } from "./_components/CabinList";
+import Filter from "@/app/_components/Filter";
 
 // This takes no effect bcz in this page prop, we r using searchParams. This only applies to statically generated pages.(I am not removing this here for my learning)
 export const revalidate = 3600;
@@ -15,10 +16,15 @@ export default function Page({ searchParams }) {
   const filter = searchParams?.capacity ?? 'all'
 
   return (
-    <div>
+    <div className="flex flex-col gap-4">
       <h1 className="text-4xl mb-5 text-accent-400 font-medium">
         Our Luxury Cabins
       </h1>
+
+      <div className="flex justify-end">
+        <Filter />
+      </div>
+
       <p className="text-primary-200 text-lg mb-10">
         Cozy yet luxurious cabins, located right in the heart of the Italian
         Dolomites. Imagine waking up to beautiful mountain views, spending your
