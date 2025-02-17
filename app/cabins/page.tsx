@@ -12,6 +12,7 @@ export const metadata = {
 
 // searchParams is only available in page.ts and not in all SC
 // one more thing - whenever use searchParams, the page can no longer be statically rendered bcz searchParams cannot be known in the runtime, so the above revalidate var have no effect
+// Also, server components rerender whenever there is a navigation(i.e change of the searchParams is also a navigation)
 export default function Page({ searchParams }) {
   const filter = searchParams?.capacity ?? 'all'
 
@@ -35,7 +36,10 @@ export default function Page({ searchParams }) {
       </p>
 
       {/* Suspense need to be outside the component that do the async work */}
-      <Suspense fallback={<Spinner />}>
+      {/* When you pass key={filter}, it tells React that this is a new component every time the filter changes. This forces Suspense to reset and fetch fresh data. */}
+      {/* 🔹 Why? */}
+      {/* Next.js wraps navigation in a transition, so React does not refresh the Suspense boundary unless something forces it. */}
+      <Suspense fallback={<Spinner key={filter} />}>
         {/* In Next.js, its always good to move the data fetching to a seperate its own component like below(for granular Suspense usage)  */}
         <CabinList filter={filter} />
       </Suspense>
