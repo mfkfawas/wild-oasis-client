@@ -1,4 +1,6 @@
+"use client"
 import { useState } from 'react';
+// import Logo from './Logo';
 
 function TextExpander({ children }) {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -15,6 +17,9 @@ function TextExpander({ children }) {
       >
         {isExpanded ? 'Show less' : 'Show more'}
       </button>
+
+{/* now this Logo component also becomes client comp as the parent is client comp. */}
+      {/* <Logo/> */}
     </span>
   );
 }
