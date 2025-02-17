@@ -5,7 +5,7 @@ import image2 from "@/public/about-2.jpg";
 import { getCabins } from "../_lib/data-service";
 
 // revalidating each 1 day(in s)(this is page level revalidation)
-// export const revalidate = 86400;
+export const revalidate = 86400;
 
 export const metadata = {
   title: "About",
