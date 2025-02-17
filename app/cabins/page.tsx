@@ -2,11 +2,18 @@ import { Suspense } from "react";
 import Spinner from "@/app/_components/Spinner";
 import { CabinList } from "./_components/CabinList";
 
+// This takes no effect bcz in this page prop, we r using searchParams. This only applies to statically generated pages.(I am not removing this here for my learning)
+export const revalidate = 3600;
+
 export const metadata = {
   title: "Cabins",
 };
 
-export default function Page() {
+// searchParams is only available in page.ts and not in all SC
+// one more thing - whenever use searchParams, the page can no longer be statically rendered bcz searchParams cannot be known in the runtime, so the above revalidate var have no effect
+export default function Page({ searchParams }) {
+  const filter = searchParams?.capacity ?? 'all'
+
   return (
     <div>
       <h1 className="text-4xl mb-5 text-accent-400 font-medium">
@@ -24,7 +31,7 @@ export default function Page() {
       {/* Suspense need to be outside the component that do the async work */}
       <Suspense fallback={<Spinner />}>
         {/* In Next.js, its always good to move the data fetching to a seperate its own component like below(for granular Suspense usage)  */}
-        <CabinList />
+        <CabinList filter={filter} />
       </Suspense>
     </div>
   );
