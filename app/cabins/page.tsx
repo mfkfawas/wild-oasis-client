@@ -12,7 +12,8 @@ export const metadata = {
 
 // searchParams is only available in page.ts and not in all SC
 // one more thing - whenever use searchParams, the page can no longer be statically rendered bcz searchParams cannot be known in the runtime, so the above revalidate var have no effect
-// Also, server components rerender whenever there is a navigation(i.e change of the searchParams is also a navigation)
+// Also, server components rerender whenever there is a navigation(i.e change of the searchParams is also a navigation).
+// All page navigations are wrapped in transition in next, in that case, eventhough this page and child comp(CabinList) rerenders and the data fetch inside the CabinList happens, but the suspense will not rerender the fallback - the way to fix that is to pass a unique key to suspense.
 export default function Page({ searchParams }) {
   const filter = searchParams?.capacity ?? 'all'
 
