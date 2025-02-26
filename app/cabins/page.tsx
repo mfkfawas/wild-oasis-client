@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import Spinner from "@/app/_components/Spinner";
 import { CabinList } from "./_components/CabinList";
 import Filter from "@/app/_components/Filter";
+import ReservationReminder from "@/app/_components/ReservationReminder";
 
 // This takes no effect bcz in this page prop, we r using searchParams. This only applies to statically generated pages.(I am not removing this here for my learning)
 export const revalidate = 3600;
@@ -43,6 +44,7 @@ export default function Page({ searchParams }) {
       <Suspense fallback={<Spinner key={filter} />}>
         {/* In Next.js, its always good to move the data fetching to a seperate its own component like below(for granular Suspense usage)  */}
         <CabinList filter={filter} />
+        <ReservationReminder />
       </Suspense>
     </div>
   );

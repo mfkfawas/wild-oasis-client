@@ -3,6 +3,7 @@ import Header from "@/app/_components/Header";
 import "@/app/_styles/global.css";
 
 import { Josefin_Sans } from "next/font/google";
+import { ReservationProvider } from "@/app/_context/ReservationContext";
 
 const josefin = Josefin_Sans({
   subsets: ["latin"],
@@ -33,7 +34,12 @@ export default function RootLayout({
         <Header />
 
         <div className="flex-1 px-8 py-12 grid">
-          <main className="max-w-7xl mx-auto w-full">{children}</main>
+          <main className="max-w-7xl mx-auto w-full">
+            {/* Whenever the data change inside a context, all client child of this provider will rerender */}
+            <ReservationProvider>
+              {children}
+            </ReservationProvider>
+          </main>
         </div>
       </body>
     </html>
