@@ -14,9 +14,16 @@ const authConfig = {
       return !!auth?.user
     },
   },
+  pages: {
+    // /login is the custom redirection route to override the default sign in page that google provided.
+    signIn: "/login",
+  },
 }
 
 export const {
+  // auth can always give us the current session
   auth,
   handlers: { GET, POST },
+  signIn,
+  signOut,
 } = NextAuth(authConfig)
