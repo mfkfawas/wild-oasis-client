@@ -2,18 +2,22 @@
 const nextConfig = {
   images: {
     remotePatterns: [
+      // Supabase config
       {
         protocol: "https",
         hostname: "tifmndrcdtekpijptmwg.supabase.co",
-        port: "",
         pathname: "/storage/v1/object/public/cabin-images/**",
-        search: "",
+      },
+      // Google OAuth images
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
       },
     ],
   },
   // our site will kind of get exported completly as static assets that we can deploy anywhere.
   // If any of the route is dynamic, we would get an error while building.
   // output: "export",
-};
+}
 
-export default nextConfig;
+export default nextConfig

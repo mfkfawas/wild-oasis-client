@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { auth } from "../_lib/auth"
+import Image from "next/image"
 
 export default async function Navigation() {
   //  whenever we do this in a component, it will make the entire route dynamic.
@@ -25,11 +26,12 @@ export default async function Navigation() {
         <li>
           {session?.user?.image ? (
             <Link href="/account" className="hover:text-accent-400 transition-colors flex items-center gap-4">
-              <img
+              <Image
                 className="h-8 rounded-full"
                 src={session.user.image}
-                alt={session.user.name}
-                referrerPolicy="no-referrer"
+                alt={session.user.name as string}
+                width={32}
+                height={32}
               />
               <span>Guest area</span>
             </Link>
