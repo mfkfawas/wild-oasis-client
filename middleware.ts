@@ -11,5 +11,5 @@ export const middleware = auth
 
 export const config = {
   // routes where the middleware runs before
-  matcher: ["/account", "/cabins"],
+  matcher: ["/account"],
 }
