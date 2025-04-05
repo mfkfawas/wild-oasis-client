@@ -8,6 +8,7 @@ interface SubmitButtonProps {
 }
 
 export default function SubmitButton({ children, pendingLabel }: PropsWithChildren<SubmitButtonProps>) {
+  // Its necessary to use this hook inside a seperate component like this which is inside a <form>.
   const { pending } = useFormStatus()
 
   return (
