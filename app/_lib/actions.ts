@@ -29,5 +29,6 @@ export async function updateGuest(formData) {
 
   if (error) throw new Error("Guest could not be updated")
 
+  // NOTE: manual cache revalidation.(This is the second type of revalidation) ---- FYI 1st type is time based that we discussed earlier.
   revalidatePath("/account/profile")
 }
