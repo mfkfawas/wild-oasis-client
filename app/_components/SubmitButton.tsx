@@ -8,6 +8,7 @@ interface SubmitButtonProps {
 }
 
 export default function SubmitButton({ children, pendingLabel }: PropsWithChildren<SubmitButtonProps>) {
+  // If we use server action as the action prop of a form, then this is the way to go.
   // Its necessary to use this hook inside a seperate component like this which is inside a <form>.
   const { pending } = useFormStatus()
 
