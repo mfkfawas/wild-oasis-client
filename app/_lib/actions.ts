@@ -95,3 +95,36 @@ export async function updateBooking(formData) {
   // 7) Redirecting
   redirect("/account/reservations")
 }
+
+// if using bind method to pass data to the action, then formData will be passed as the last argument.
+export async function createBooking(bookingData, formData) {
+  const session = await auth()
+  if (!session) throw new Error("You must be logged in")
+
+  // if you have lot of data in formData, then you can use this method to convert it to object.
+  // const formDataAsObject = Object.fromEntries(formData.entries())
+
+  const newBooking = {
+    ...bookingData,
+    guestId: session.user.guestId,
+    numGuests: Number(formData.get("numGuests")),
+    observations: formData.get("observations").slice(0, 1000),
+    extrasPrice: 0,
+    totalPrice: bookingData.cabinPrice,
+    isPaid: false,
+    hasBreakfast: false,
+    status: "unconfirmed",
+  }
+
+  // TODO: do server side validation and esp confirm there is no other booking on the same dates.
+
+  const { error } = await supabase.from("bookings").insert([newBooking])
+
+  if (error) throw new Error("Booking could not be created")
+
+  // browser cache get reset and refilled with the new data(in dynamic route). This not only clear the borwser cache(also called router cache), but also atleast for static sites -
+  //  the data cache and full route cache which are located on server.
+  revalidatePath(`/cabins/${bookingData.cabinId}`)
+
+  redirect("/cabins/thankyou")
+}
